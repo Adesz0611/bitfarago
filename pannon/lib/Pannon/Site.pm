@@ -2,7 +2,7 @@ package Pannon::Site;
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 
 sub get($c) {
-    $c->reply->static('index.html');
+    $c->reply->static('menu.html');
 }
 
 

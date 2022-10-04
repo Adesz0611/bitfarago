@@ -4,19 +4,6 @@ use Mojo::Base 'Mojolicious::Controller', -signatures;
 sub all($c) {
     my $filmek = $c->pg->db->query('SELECT * FROM filmek ORDER BY nev')->hashes;
     $c->render(json => $filmek);
-#    $c->render(json => [
-#        {
-#            nev => 'asd',
-#            megjelenes_datum => 2001,
-#            kategoria => 'vigjatek,krimi',
-#        },
-#        {
-#            nev => 'dfg',
-#            megjelenes_datum => 2004,
-#            kategoria => 'krimi',
-#        },
-#    ],
-#    );
 }
 
 sub filtered($c) {
@@ -25,11 +12,15 @@ sub filtered($c) {
     my @unszimpatikus = @{$data->{unszimpatikus}};
 
     my $query = 'SELECT * FROM filmek WHERE ';
-    $query .= "kategoria LIKE '%" . pop(@szimpatikus) . "%'";
-    $query .= " AND kategoria LIKE '%" . pop(@szimpatikus) . "%'" while (scalar @szimpatikus);
+    $query .= "(kategoria LIKE '%" . pop(@szimpatikus) . "%'";
+    $query .= " OR kategoria LIKE '%" . pop(@szimpatikus) . "%'" while (scalar @szimpatikus);
+    $query .= ')';
     $query .= " AND kategoria NOT LIKE '%" . pop(@unszimpatikus) . "%'" while (scalar @unszimpatikus);
     $query .= ' ORDER BY nev';
 
+open FH, '>adesz';
+print FH "$query\n";
+close FH;
     my $filmek = $c->pg->db->query($query)->hashes;
 
     $c->render(json => $filmek);

@@ -2,8 +2,6 @@ package Pannon;
 use Mojo::Base 'Mojolicious', -signatures;
 use Mojo::Pg;
 
-#helper 'pg' => sub { state $pg = Mojo::Pg->new('postgresql://localhost/pannon') };
-
 # This method will run once at server start
 sub startup ($self) {
 
@@ -21,10 +19,6 @@ sub startup ($self) {
   $r->get('/')->to('site#get');
   $r->get('/all')->to('api#all');
   $r->post('/filtered')->to('api#filtered');
-  
-  $r->get('/vue')->to(cb => sub ($c) {
-    $c->reply->static('dist/index.html');
-  });
 }
 
 1;
