@@ -288,16 +288,11 @@
     <script>
         let a = 0
         function rndimg(){
-            if(a >= 0 && a < 10)
-            {
-                var imgsrc = ["./img/slider_img/slider01.jpg", "./img/slider_img/slider02.jpg", "./img/slider_img/slider03.jpg", "./img/slider_img/slider04.jpg", "./img/slider_img/slider05.jpg", "./img/slider_img/slider06.jpg", "./img/slider_img/slider07.jpg", "./img/slider_img/slider08.jpg", "./img/slider_img/slider09.jpg", "./img/slider_img/slider10.jpg"];
-                var imgtitle = [];
-                document.getElementById("gallery").innerHTML="<a href='" + imgsrc[a] + "' target='_blank'><img src='" + imgsrc[a] + "' id='gallery_img' class='border-0 rounded mb-5' alt = '" + imgsrc[a] + "' title='VSZC Ipari Technikum' /></a>";
-                a++;
-            }
-            if(a == 10)
-                a = 0;
-
+            var imgsrc = ["./img/slider_img/slider01.jpg", "./img/slider_img/slider02.jpg", "./img/slider_img/slider03.jpg", "./img/slider_img/slider04.jpg", "./img/slider_img/slider05.jpg", "./img/slider_img/slider06.jpg", "./img/slider_img/slider07.jpg", "./img/slider_img/slider08.jpg", "./img/slider_img/slider09.jpg", "./img/slider_img/slider10.jpg"];
+            var imgtitle = [];
+            document.getElementById("gallery").innerHTML="<a href='" + imgsrc[a] + "' target='_blank'><img src='" + imgsrc[a] + "' id='gallery_img' class='border-0 rounded mb-5' alt = '" + imgsrc[a] + "' title='VSZC Ipari Technikum' /></a>";
+            a++;
+            a %= 10;
         }
     </script>
     </body>
