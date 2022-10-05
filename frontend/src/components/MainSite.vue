@@ -22,7 +22,8 @@
       </div>
       <!-- {{ unszimpatikus }} -->
     </div>
-    <button @click="szures" class="btn btn-primary">Szűrés</button>
+
+    <!-- <button @click="szures" class="btn btn-primary">Szűrés</button> -->
 
     <table class="table">
       <thead>
@@ -84,6 +85,14 @@ export default {
       });
     }
   }
+  watch: {
+    szimpatikus () {
+       this.szures();
+    },
+    unszimpatikus () {
+       this.szures();
+    },
+  },
 }
 </script>
 
